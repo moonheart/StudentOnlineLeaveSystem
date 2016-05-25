@@ -1,0 +1,41 @@
+﻿@model LeaveSystem.Web.ViewModels.MajorEditViewModel
+@{
+    ViewBag.Title = "编辑专业";
+    SelectList selectList = ViewBag.selectList;
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>编辑专业</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @Html.ValidationSummary()
+                    @using (Html.BeginForm("Edit", "Major", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MajorName, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.MajorName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">所属学院</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("DepartmentId", selectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

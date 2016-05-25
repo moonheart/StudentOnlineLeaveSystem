@@ -1,0 +1,111 @@
+﻿@using LeaveSystem.Web.Models
+
+@{
+    ViewBag.Title = "Index";
+    var checks = ViewBag.Checks as ICollection<Check>;
+}
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h2>所有待审请假</h2>
+        </div>
+        <div class="panel-body ex-card-body">
+            @if (checks == null || !checks.Any())
+            {
+                <span class="text-success">暂时没有需要审核的请假。</span>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>申请人</th>
+                            <th>申请时间</th>
+                            <th>请假事由</th>
+                            <th>当前状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in checks)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Leave.Student.Student.Name</td>
+                                <td>@item.AddTime</td>
+                                <td>@item.Leave.Reason</td>
+                                <td>@item.CheckStatus</td>
+                                <td>
+                                    @Html.ActionLink("详细", "Detail", new { id = item.Id }, new { @class = "btn btn-primary btn-xs delete" })
+                                    @if (item.CheckStatus == CheckStatus.未查看 || item.CheckStatus == CheckStatus.已查看)
+                                    {
+                                        <a class="btn btn-success btn-xs delete" data-id="@item.Id" data-status="0" data-toggle="modal" data-target="#checkModal">通过</a>
+                                        <a class="btn btn-warning btn-xs delete" data-id="@item.Id" data-status="1" data-toggle="modal" data-target="#checkModal">拒绝</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="#">导出</a>
+            }
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("Approve", "Check", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">处理请假请求</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="CheckId" />
+                    <input type="hidden" name="Option" />
+                    <div class="form-group">
+                        <label class="control-label col-md-2">审核意见</label>
+                        <div class="col-md-10">
+                            <textarea name="CheckOpinion" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">确认</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $('#checkModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var status = button.data('status'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('.modal-body input[name=CheckId]').val(id);
+            modal.find('.modal-body input[name=Option]').val(status);
+        });
+
+        $('#checkModal button:submit').on("click", function () {
+            if ($('#checkModal .modal-body textarea[name=CheckOpinion]').val().length < 10) {
+                alert("请填写足够意见");
+                return false;
+            }
+            return true;
+        });
+
+        $(".pull-right a").each(function (i, item) {
+            if (item.innerText === "@ViewBag.Title") {
+                $(this).addClass("active");
+            }
+        });
+    </script>
+}

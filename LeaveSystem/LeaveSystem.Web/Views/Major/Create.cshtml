@@ -1,0 +1,65 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.MajorCreateViewModel
+@{
+    ViewBag.Title = "添加专业";
+    List<Major> majors = ViewBag.Majors;
+    SelectList selectList = ViewBag.selectList;
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>添加专业</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @Html.ValidationSummary()
+                    @using (Html.BeginForm("Create", "Major", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MajorName, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.MajorName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">所属学院</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("DepartmentId", selectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>现有的专业</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    <div class="list-group">
+                        @if (majors != null && majors.Any())
+                        {
+                            foreach (var major in majors)
+                            {
+                                <a class="list-group-item list-group-item-heading">@major.Name</a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="list-group-item">暂无数据</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

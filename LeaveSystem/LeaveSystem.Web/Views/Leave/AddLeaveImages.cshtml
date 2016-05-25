@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "添加请假图片";
+}
+@Styles.Render("~/bundles/upload/css")
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-body ex-card-body">
+            <div id="upload"></div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/upload/js")
+@section scripts
+{
+    <script type="text/javascript">
+        $("#upload").diyUpload({
+            url: 'Leave/UploadImage',
+            success: function (data) {
+                console.info(data);
+            },
+            error: function (err) {
+                console.info(err);
+            },
+            buttonText: '选择文件',
+            chunked: true,
+            // 分片大小
+            chunkSize: 512 * 1024,
+            //最大上传的文件数量, 总文件大小,单个文件大小(单位字节);
+            fileNumLimit: 50,
+            fileSizeLimit: 500000 * 1024,
+            fileSingleSizeLimit: 50000 * 1024,
+            accept: {}
+        });
+    </script>
+}

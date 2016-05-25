@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EAFA6A08-C97A-49CD-9B34-B1FECEA3492B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeaveSystem.Web</RootNamespace>
+    <AssemblyName>LeaveSystem.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\..\StudentOnlineLeaveSystem\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\..\StudentOnlineLeaveSystem\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BLL\BaseManager.cs" />
+    <Compile Include="BLL\CheckManager.cs" />
+    <Compile Include="BLL\DepartmentManager.cs" />
+    <Compile Include="BLL\LeaveConfigManager.cs" />
+    <Compile Include="BLL\LessonManager.cs" />
+    <Compile Include="BLL\LoginLogManager.cs" />
+    <Compile Include="BLL\MajorManager.cs" />
+    <Compile Include="BLL\GradeManager.cs" />
+    <Compile Include="BLL\ClassManager.cs" />
+    <Compile Include="BLL\PositionManager.cs" />
+    <Compile Include="BLL\OfficeManager.cs" />
+    <Compile Include="BLL\ResumeManager.cs" />
+    <Compile Include="Common\Security.cs" />
+    <Compile Include="Common\UserNumberTool.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CheckController.cs" />
+    <Compile Include="Controllers\ClassController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\GradeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaveConfigController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
+    <Compile Include="Controllers\LessonController.cs" />
+    <Compile Include="Controllers\MajorController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OfficeController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="DAL\BaseStore.cs" />
+    <Compile Include="DAL\CheckStore.cs" />
+    <Compile Include="DAL\ClassStore.cs" />
+    <Compile Include="DAL\DepartmentStore.cs" />
+    <Compile Include="DAL\GradeStore.cs" />
+    <Compile Include="DAL\LeaveConfigStore.cs" />
+    <Compile Include="DAL\LessonStore.cs" />
+    <Compile Include="DAL\MajorStore.cs" />
+    <Compile Include="DAL\OfficeStore.cs" />
+    <Compile Include="DAL\PositionStore.cs" />
+    <Compile Include="DAL\ResumeApplyStore.cs" />
+    <Compile Include="DAL\RoleStore.cs" />
+    <Compile Include="IBLL\IBaseManager.cs" />
+    <Compile Include="IBLL\ICheckManager.cs" />
+    <Compile Include="IBLL\IClassManager.cs" />
+    <Compile Include="IBLL\IDepartmentManager.cs" />
+    <Compile Include="IBLL\IGradeManager.cs" />
+    <Compile Include="IBLL\ILeaveConfigManager.cs" />
+    <Compile Include="IBLL\ILeaveManager.cs" />
+    <Compile Include="IBLL\IMajorManager.cs" />
+    <Compile Include="IBLL\IOfficeManager.cs" />
+    <Compile Include="IBLL\IPositionManager.cs" />
+    <Compile Include="IBLL\IResumeManager.cs" />
+    <Compile Include="IBLL\IStudentManager.cs" />
+    <Compile Include="IBLL\ITeacherManager.cs" />
+    <Compile Include="IDAL\IBaseStore.cs" />
+    <Compile Include="IDAL\ICheckStore.cs" />
+    <Compile Include="IDAL\IClassStore.cs" />
+    <Compile Include="IDAL\IDepartmentStore.cs" />
+    <Compile Include="IDAL\IGradeStore.cs" />
+    <Compile Include="IDAL\ILeaveConfigStore.cs" />
+    <Compile Include="IDAL\ILeaveStore.cs" />
+    <Compile Include="DAL\UserStore.cs" />
+    <Compile Include="IDAL\ILessonAsignStore.cs" />
+    <Compile Include="IDAL\ILessonInfoStore.cs" />
+    <Compile Include="IDAL\ILoginLogStore.cs" />
+    <Compile Include="IDAL\IMajorStore.cs" />
+    <Compile Include="IDAL\IOfficeStore.cs" />
+    <Compile Include="IDAL\IPositionStore.cs" />
+    <Compile Include="IDAL\IResumeApplyStore.cs" />
+    <Compile Include="IDAL\ITeacherInfoStore.cs" />
+    <Compile Include="IDAL\IStudentInfoStore.cs" />
+    <Compile Include="Infrastructure\ControllerExt.cs" />
+    <Compile Include="Infrastructure\MyIdentityExtensions.cs" />
+    <Compile Include="Infrastructure\Permissions.cs" />
+    <Compile Include="Infrastructure\TaskExtensions.cs" />
+    <Compile Include="Migrations\201603190354358_GKUSG.cs" />
+    <Compile Include="Migrations\201603190354358_GKUSG.Designer.cs">
+      <DependentUpon>201603190354358_GKUSG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaveConfig.cs" />
+    <Compile Include="Models\LessonAsign.cs" />
+    <Compile Include="Models\LessonInfo.cs" />
+    <Compile Include="Models\Office.cs" />
+    <Compile Include="Models\Class.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\CourseAssignment.cs" />
+    <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\Grade.cs" />
+    <Compile Include="Models\Major.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\ResumeApply.cs" />
+    <Compile Include="Models\StudentInfo.cs" />
+    <Compile Include="Models\TeacherInfo.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\Entity.cs" />
+    <Compile Include="DAL\EntityStore.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AppDbContext.cs" />
+    <Compile Include="BLL\RoleManager.cs" />
+    <Compile Include="BLL\UserManager.cs" />
+    <Compile Include="Infrastructure\ClaimsAccessAttribute.cs" />
+    <Compile Include="Infrastructure\ClaimsRoles.cs" />
+    <Compile Include="Infrastructure\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Infrastructure\CustomPasswordValidator.cs" />
+    <Compile Include="Infrastructure\CustomUserValidator.cs" />
+    <Compile Include="BLL\EntityManager.cs" />
+    <Compile Include="Infrastructure\IdentityHelper.cs" />
+    <Compile Include="BLL\LeaveManager.cs" />
+    <Compile Include="DAL\LeaveStore.cs" />
+    <Compile Include="Infrastructure\LocationClaimsProvider.cs" />
+    <Compile Include="Infrastructure\Resources.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Check.cs" />
+    <Compile Include="Models\Leave.cs" />
+    <Compile Include="Models\LoginLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\CheckViewModels.cs" />
+    <Compile Include="ViewModels\DepartmentViewModels.cs" />
+    <Compile Include="ViewModels\InstitutionViewModels.cs" />
+    <Compile Include="ViewModels\LeaveViewModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\OfficeViewModels.cs" />
+    <Compile Include="ViewModels\PositionViewModels.cs" />
+    <Compile Include="ViewModels\ResumeViewModels.cs" />
+    <Compile Include="ViewModels\RoleViewModels.cs" />
+    <Compile Include="ViewModels\UserAdminViewModels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Images\cover_6_big.jpg" />
+    <Content Include="Images\head-unlogged.png" />
+    <Content Include="Images\head.jpg" />
+    <Content Include="Images\top-logo.png" />
+    <Content Include="Images\yanzhengma.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Profiles.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\UserAdmin\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\UserAdmin\Create.cshtml" />
+    <Content Include="Views\UserAdmin\Edit.cshtml" />
+    <Content Include="Views\Leave\Detail.cshtml" />
+    <Content Include="Views\Leave\Apply.cshtml" />
+    <Content Include="Views\Class\Index.cshtml" />
+    <Content Include="Views\Class\Create.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Major\Index.cshtml" />
+    <Content Include="Views\Major\Create.cshtml" />
+    <Content Include="Views\Major\Edit.cshtml" />
+    <Content Include="Views\Grade\Index.cshtml" />
+    <Content Include="Views\Grade\Create.cshtml" />
+    <Content Include="Views\Grade\Edit.cshtml" />
+    <Content Include="Views\Class\Edit.cshtml" />
+    <Content Include="Views\Class\AddStudent.cshtml" />
+    <Content Include="Views\LeaveConfig\Index.cshtml" />
+    <Content Include="Views\LeaveConfig\Edit.cshtml" />
+    <Content Include="Views\Leave\AddLeaveImages.cshtml" />
+    <Content Include="Views\Check\Index.cshtml" />
+    <Content Include="Views\Check\Detail.cshtml" />
+    <Content Include="Views\Check\History.cshtml" />
+    <Content Include="Views\Leave\History.cshtml" />
+    <None Include="Views\Leave\Index.cshtml" />
+    <Content Include="Views\Leave\Notice.cshtml" />
+    <Content Include="Views\Leave\Success.cshtml" />
+    <Content Include="Views\UserAdmin\Disable.cshtml" />
+    <Content Include="Views\UserAdmin\Enable.cshtml" />
+    <Content Include="Views\Office\Index.cshtml" />
+    <Content Include="Views\Shared\_PageHeader.cshtml" />
+    <Content Include="Views\Office\Edit.cshtml" />
+    <Content Include="Views\Office\Create.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
+    <Content Include="Views\Position\Create.cshtml" />
+    <Content Include="Views\Position\Edit.cshtml" />
+    <Content Include="Views\Shared\_HomeLeftPartial.cshtml" />
+    <Content Include="Views\Resume\Index.cshtml" />
+    <Content Include="Views\Resume\History.cshtml" />
+    <Content Include="Views\Manage\HeadSet.cshtml" />
+    <Content Include="Views\Lesson\StudentLesson.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603190354358_GKUSG.resx">
+      <DependentUpon>201603190354358_GKUSG.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>21667</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:21256/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

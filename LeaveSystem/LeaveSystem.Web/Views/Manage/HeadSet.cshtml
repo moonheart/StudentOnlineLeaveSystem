@@ -1,0 +1,50 @@
+﻿@model LeaveSystem.Web.ViewModels.HeadSetViewModel
+@{
+    ViewBag.Title = "HeadSet";
+}
+
+@{
+    ViewBag.Title = "设置头像";
+
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-5">
+            @Html.Partial("_HomeLeftPartial")
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h2>设置头像</h2>
+                </div>
+                <div class="ex-card-body ex-card-box-lg">
+                    @using (Html.BeginForm("HeadSet", "Manage", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(e => e.UserId)
+                        <div class="alert-success">
+                            @ViewBag.Message
+                        </div>
+
+                        <div class="form-group">
+                            <img src="@Model.UserHeadAddress" class="img-circle" width="200" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" name="HeadFile" id="HeadFile" />
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label"></label>
+                            <div class="col-xs-9">
+                                <button type="submit" name="submit" class="btn btn-success" data-loading-text="正在提交...">保 存</button>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

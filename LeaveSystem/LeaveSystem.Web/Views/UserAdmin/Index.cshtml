@@ -1,0 +1,112 @@
+﻿@using LeaveSystem.Web.Models
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<LeaveSystem.Web.Models.User>
+
+@{
+    ViewBag.Title = "所有用户";
+    //IPagedList<User> list = ViewBag.PagedList;
+    List<Role> roles = ViewBag.Roles;
+}
+@Html.Partial("_PageHeader", new ViewDataDictionary { { "head", "所有用户" }, { "name", "创建新用户" }, { "des", "查看所有用户的列表，进行管理" }, { "act", "Create" } })
+
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            @using (Html.BeginForm("Index", "UserAdmin", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <label class="control-label">选择角色</label> @Html.DropDownList("selectedRole", @ViewBag.SelectedRole as SelectList, "全部", new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="筛选" />
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="搜索" />
+            }
+        </div>
+        <div class="panel-body ex-card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>号码</th>
+                        <th>姓名</th>
+                        <td>角色</td>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr><td colspan="4" class="text-center">暂无用户</td></tr>
+                    }
+                    else
+                    {
+                        foreach (var user in Model)
+                        {
+                            var id = user.Id;
+                            var thisRoles = roles.Where(r => r.Users.Any(ur => ur.UserId == id)).ToList();
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.UserName</td>
+                                <td>@user.Name</td>
+                                @if (thisRoles.Any())
+                                {
+                                    <td>@thisRoles.Select(r => r.Name).Aggregate((a, b) => a + "," + b) </td>
+                                }
+                                else
+                                {
+                                    <td>暂无</td>
+                                }
+                                <td>
+                                    @Html.ActionLink("编辑", "Edit", new { id = user.Id }, new { @class = "btn btn-primary btn-xs" })
+                                    <a class="btn btn-danger btn-xs delete" data-id="@user.Id" data-name="@user.UserName" data-toggle="modal" data-target="#deleteModal">删除</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer ex-card-footer text-center">
+            @Html.PagedListPager(Model, p => Url.Action("Index", new { p, currentFilter = ViewBag.CurrentFilter, selectedRole = ViewBag.SelectedRoleId }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @using (Html.BeginForm("Delete", "UserAdmin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">注意！</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1></h1>
+                        <input type="hidden" name="id" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var name = button.data('name'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('.modal-body input').val(id);
+            modal.find('.modal-body h1').text('确认删除 ' + name + '?');
+        });
+
+    </script>
+}

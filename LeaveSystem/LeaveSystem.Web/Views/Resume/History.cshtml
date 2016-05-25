@@ -1,0 +1,53 @@
+﻿@using LeaveSystem.Web.Models
+@{
+    ViewBag.Title = "历史销假";
+    var resumes = ViewBag.Resumes as ICollection<ResumeApply>;
+}
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h2>历史销假</h2>
+        </div>
+        <div class="panel-body ex-card-body">
+            @if (resumes == null || !resumes.Any())
+            {
+                <span class="text-success">暂时没有历史销假。</span>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>申请人</th>
+                            <th>申请时间</th>
+                            <th>请假事由</th>
+                            <th>当前状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in resumes)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Leave.Student.Student.Name</td>
+                                <td>@item.AddTime</td>
+                                <td>@item.Leave.Reason</td>
+                                <td>@item.ResumeApplyType</td>
+                                <td>
+                                    @if (item.ResumeApplyType == ResumeApplyType.未处理)
+                                    {
+                                        <a class="btn btn-success btn-xs delete" data-id="@item.Id" data-status="1" data-toggle="modal" data-target="#checkModal">通过</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="#">导出</a>
+            }
+        </div>
+    </div>
+</div>

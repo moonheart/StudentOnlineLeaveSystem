@@ -1,0 +1,151 @@
+﻿@using LeaveSystem.Web.Models
+@model IEnumerable<LeaveSystem.Web.ViewModels.LeaveListViewModel>
+
+@{
+    ViewBag.Title = "所有请假";
+}
+
+<div class="container ex-container">
+
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h2>所有请假</h2>
+        </div>
+        <div class="panel-body ex-card-body">
+            @if (!Model.Any())
+            {
+                <span class="text-success">恭喜！你还没有请过假。</span>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveReason)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ToWhere)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>是否销假</th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveReason)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ToWhere)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Leave.LeaveStatus)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Leave.IsResume)</td>
+                                <td>
+                                    @Html.ActionLink("详细", "Detail", new { id = item.LeaveId }, new { @class = "btn btn-default btn-xs delete" })
+                                    @if (item.Leave.Checks.All(e => e.CheckStatus == CheckStatus.已通过) && item.Leave.ResumeApply == null)
+                                    {
+                                        <a class="btn btn-primary btn-xs delete" data-id="@item.LeaveId" data-status="0" data-toggle="modal" data-target="#checkModal">销假</a>
+                                    }
+                                    @if (item.Leave.LeaveStatus == LeaveStatus.已提交 || item.Leave.LeaveStatus == LeaveStatus.请假审核中)
+                                    {
+                                        <a class="btn btn-primary btn-xs calcel" data-id="@item.LeaveId" data-toggle="modal" data-target="#cancelModal">取消</a>
+                                    }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="#">导出</a>
+            }
+        </div>
+        <div class="panel-footer ex-card-footer">
+            @Html.ActionLink("请假", "Apply", "", new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("Resume", "Leave", FormMethod.Post, new {@class = "form-horizontal"}))
+            {
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">申请销假</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id" />
+                <p>你正在申请销假，请确认</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary">确认</button>
+            </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("Cancel", "Leave", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">取消请假</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" />
+                    <p>你正在取消请假，请确认</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">确认</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $('#checkModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var modal = $(this);
+            modal.find('.modal-body input[name=id]').val(id);
+        });
+
+        $('#cancelModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var modal = $(this);
+            modal.find('.modal-body input[name=id]').val(id);
+        });
+   </script>
+}

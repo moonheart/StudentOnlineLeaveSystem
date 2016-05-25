@@ -1,0 +1,134 @@
+<!doctype html> 
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>请假信息 - 在线请假系统</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body style="padding-top: 70px;padding-bottom: 70px">
+<div class="container">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid"> 
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topFixedNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <a class="navbar-brand" href="#">请假系统</a></div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="topFixedNavbar1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">首页<span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="#">请假<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">课程表</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">登录</a></li>
+          <li><a href="#">注册</a></li>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">你好，张三<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">请假记录</a></li>
+              <li><a href="#">个人设置</a></li>
+              <li class="divider"></li>
+              <li><a href="#">请假申请</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse --> 
+    </div>
+    <!-- /.container-fluid --> 
+  </nav>
+  
+  <div class="alert alert-info" role="alert">恭喜！你还没有请过假。</div>
+  
+  <p>
+    <form class="form-inline">
+      <label>过滤：</label>
+      <div class="form-group">
+        <label for="searchType">类型</label>
+        <div class=" btn-group" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked>病假
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="options" id="option2" autocomplete="off">事假
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="searchReason">请假原因</label>
+        <input class="form-control" type="text" id="searchReason" placeholder="搜索请假原因">
+      </div>
+      <div class="form-group">
+        <label>时间</label>
+        <input class="form-control" type="date" id="startTime">
+        <label>到</label>
+        <input class="form-control" type="date" id="endTime">
+      </div>
+      <input type="submit" class="btn btn-primary">
+    </form>
+  </p>
+  
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>类型</th>
+        <th>原因</th>
+        <th>时间</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>病假</td>
+        <td>被人打断了腿，去医院看</td>
+        <td>从 2015年6月5日（星期二） 第 1 节课到第 2 节课，共 2 节课</td>
+        <td>已销假</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>事假</td>
+        <td>上次被人打断了腿，去报仇</td>
+        <td>从 2015年6月5日（星期二） 到 2015年6月6日（星期三），共 2 天</td>
+        <td>审批中</td>
+      </tr>
+    </tbody>
+  </table>
+  <nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <p class="navbar-text">学生在线请假系统</p>
+    <!-- /.container-fluid --> 
+  </nav>
+</div>
+<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script> 
+<script src="js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>

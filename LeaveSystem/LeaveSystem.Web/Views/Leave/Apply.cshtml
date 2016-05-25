@@ -1,0 +1,154 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.LeaveApplyViewModel
+
+@{
+    ViewBag.Title = "请假申请";
+    var hide = "hide";
+}
+@Styles.Render("~/bundles/upload/css")
+
+<div class="container ex-container">
+
+    <div class="row">
+        <div class="panel panel-default col-md-12 ex-card">
+            <div class="panel-heading ex-card-header">
+                <h3>请填写事由及时间。</h3>
+            </div>
+            <div class="panel-body ex-card-body">
+                @using (Html.BeginForm("Apply", "Leave", "", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group ">
+                        @Html.LabelFor(l => l.ToWhere, new { @class = "control-label col-md-2", @for = "leaveToWhere" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(l => l.ToWhere, new { htmlAttributes = new { @class = "form-control", @placeholder = "请填写外出去向" } })
+                            @Html.ValidationMessageFor(l => l.ToWhere, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(l => l.Reason, new { @class = "control-label col-md-2", @for = "leaveReasonD" })
+                        <div class="col-md-offset-2 ">
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(l => l.Category, LeaveCategory.病假, new { @checked = true })
+                                病假
+                            </label>
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(l => l.Category, LeaveCategory.事假)
+                                事假
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-md-offset-2 col-md-4">
+                            @Html.EditorFor(l => l.Reason, new { htmlAttributes = new { @class = "form-control", @placeholder = "请填写请假原因" } })
+                            @Html.ValidationMessageFor(l => l.Reason, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(l => l.TimeType, new { @class = "control-label col-md-2" })
+                        <div class="col-md-0 col-md-offset-2">
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(l => l.TimeType, "0", new { @checked = true })
+                                一天以内
+                            </label>
+                            <label class="radio-inline">
+                                @Html.RadioButtonFor(l => l.TimeType, "1")
+                                一天以上
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline timeInput @if (Model == null)
+                                                                 {
+                                                                 }
+                                                                 else if (Model.TimeType != TimeType.一天内)
+                                                                 {@hide
+                                                                 } ">
+                        <div class=" input-group col-md-2 col-md-offset-2">
+                            @Html.EditorFor(l => l.OneDayTime, new { htmlAttributes = new { @class = "form-control", @type = "date", @placeholder = "请假日期" } })
+                            <span class="input-group-addon">的</span>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-addon">第</span>
+                            @Html.EditorFor(l => l.OneDayStart, new { htmlAttributes = new { @type = "number", @value = 1, @class = "form-control" } })
+                            <span class="input-group-addon">节课</span>
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-addon">到第</span>
+                            @Html.EditorFor(l => l.OneDayEnd, new { htmlAttributes = new { @type = "number", @value = 1, @class = "form-control" } })
+                            <span class="input-group-addon">节课</span>
+                        </div>
+                        <div class="col-md-offset-2 col-md-8">
+                            <p class="form-control-static text-info">
+                                共<span id="totalClasses">1</span>节课
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group form-inline timeInput @if (Model == null)
+                                                                 {@hide
+                                                                 }
+                                                                 else if (Model.TimeType != TimeType.一天以上)
+                                                                 {@hide
+                                                                 } ">
+                        <div class=" input-group col-md-3 col-md-offset-2">
+                            <span class="input-group-addon">从</span>
+                            @Html.EditorFor(l => l.StartDate, new { htmlAttributes = new { @type = "date", @class = "form-control", @placeholder = "开始日期" } })
+                        </div>
+                        <div class="input-group col-md-3">
+                            <span class="input-group-addon">到</span>
+                            @Html.EditorFor(l => l.EndDate, new { htmlAttributes = new { @type = "date", @class = "form-control", @placeholder = "结束日期" } })
+                        </div>
+                        <div class="col-md-offset-2 col-md-8">
+                            <p class="form-control-static text-info">
+                                共<span id="totalDays">1</span>天
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">图片附件</label>
+                        <div class="col-md-0 col-md-offset-2">
+                            <input name="UploadFile" id="UploadFile" type="file"  />
+                        </div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div class="col-md-offset-2 col-md-2">
+                            <button type="submit" class="btn btn-primary">下一步</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/upload/js")
+    <script>
+        $("input[name='TimeType']").change(function () {
+            $(".timeInput").toggleClass("hide");
+        });
+
+        $(function () {
+            var date = new Date();
+            var text = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+            $("input[type='date']").each(function () {
+                if (!$(this).val())
+                    $(this).val(text);
+            });
+
+            if (!$("input[type='number']").val())
+                $("input[type='number']").val(1);
+        });
+
+        $(function() {
+            $("#OneDayStart,#OneDayEnd").change(function() {
+                $("#totalClasses").text($("#OneDayEnd").val() - $("#OneDayStart").val() + 1);
+            });
+            $("#StartDate,#EndDate").change(function () {
+                $("#totalDays").text($("#EndDate").val() - $("#StartDate").val() + 1);
+            });
+        });
+
+    </script>
+}

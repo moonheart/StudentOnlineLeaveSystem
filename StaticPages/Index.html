@@ -1,0 +1,81 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首页 - 在线请假系统</title>
+<script src="js/jquery-1.11.3.min.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body style="padding-top: 70px;padding-bottom: 70px">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topFixedNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <a class="navbar-brand" href="#">请假系统</a></div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="topFixedNavbar1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">首页<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">请假<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">课程表</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">登录</a></li>
+        <li><a href="#">注册</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">你好，张三<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">请假记录</a></li>
+            <li><a href="#">个人设置</a></li>
+            <li class="divider"></li>
+            <li><a href="#">请假申请</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid --> 
+</nav>
+<div class="container ex-container">
+  <div class="panel panel-default ex-card">
+    <div class="panel-heading ex-card-header">
+      <h1>当前没有正在进行的请假。</h1>
+    </div>
+    <div class="panel-body ex-card-body">
+      <h3><a href="#">查看请假须知</a></h3>
+    </div>
+    <div class="panel-footer ex-card-footer">
+      <button type="button" class="btn btn-primary">我要请假</button>
+    </div>
+  </div>
+  <div class="panel panel-default ex-card">
+    <div class="panel-heading ex-card-header">
+      <h1>当前正在进行的请假:</h1>
+    </div>
+    <div class="panel-body ex-card-body">
+    <h3 class="text-info">摔伤请假</h3>
+    </div>
+    <div class="panel-footer ex-card-footer">
+    <button class="btn btn-primary">详细</button>
+    </div>
+  </div>
+</div>
+<div class="container hidden-xs">
+  <div class="ex-footer">
+    <div class="footer-copyright"> <span><a href="#">关于我们</a> · <a href="#">联系我们</a> · <a href="#">版权声明</a></span> <span class="pull-right">Copyright © 2015-2016 在线请假系统, All Rights Reserved.</span> </div>
+  </div>
+</div>
+<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script> 
+<script src="js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>

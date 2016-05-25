@@ -1,0 +1,23 @@
+﻿@model LeaveSystem.Web.Models.User
+
+@{
+    ViewBag.Title = "确认禁用用户";
+}
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h2>确认禁用用户？</h2>
+        </div>
+        <div class="panel-body ex-card-body">
+            @using (@Html.BeginForm())
+            {
+                <p class="text-warning">确认禁用用户：@Model.UserName</p>
+                <div class="form-group">
+                    <button class="btn btn-danger" type="submit">确认禁用</button>
+                    @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

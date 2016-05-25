@@ -1,0 +1,34 @@
+﻿@model StudentOnlineLeaveSystem.Models.AppUser
+@{
+    ViewBag.Title = "信息统计";
+    ViewBag.User = Model;
+}
+@{
+    var leave = @Model.Leaves.OrderByDescending(l => l.AddTime).SingleOrDefault();
+    var leavetime = leave == null ? "还没有请过假" : string.Format("{0}  {1}", leave.AddTime.ToString("yyyy-M-d dddd"), leave.Reason);
+}
+
+<div class="row">
+    <div class="col-md-5 hidden-xs hidden-sm">
+        @Html.Partial("_PersonalLeft")
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-default ex-card">
+            <div class="panel-heading ex-card-header">
+                <h2>我的信息统计</h2>
+            </div>
+            <div class="panel-body ex-card-body">
+                <ul class="list-group ex-flat-list">
+                    <li class="list-group-item ex-list-item-action">最近一次请假: @leavetime </li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                    <li class="list-group-item ex-list-item-action">请假最多的课程：</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

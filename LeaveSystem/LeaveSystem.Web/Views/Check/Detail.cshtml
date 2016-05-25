@@ -1,0 +1,168 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.CheckApprovalViewModel
+@{
+    ViewBag.Title = "请假详情";
+    var leave = ViewBag.Leave as Leave;
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h2>请假详情</h2>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @if (leave != null)
+                    {
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">申 请 人</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@leave.Student.Student.Name</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">申请时间</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@leave.AddTime</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">请假原因</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@leave.Reason</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">外出地点</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@leave.ToWhere</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">请假类型</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@leave.Category</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">请假时间</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">
+                                        @{
+                        string res = "";
+                        switch (leave.TimeType)
+                        {
+                            case TimeType.一天内:
+                                res = string.Format("{0} 的第 {1} 节课到第 {2} 节课", leave.OneDayTime.ToString("yyyy年M月d日"),
+                                    leave.OneDayStart, leave.OneDayEnd);
+                                break;
+                            case TimeType.一天以上:
+                                res = string.Format("{0} 到 {1}", leave.StartDate.ToString("yyyy年M月d日"),
+                                    leave.EndDate.ToString("yyyy年M月d日"));
+                                break;
+                        }
+                                        }@res
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">图片附件</label>
+                                <div class="col-xs-8">
+                                    @if (string.IsNullOrEmpty(@leave.ImageUrls))
+                                    {
+                                        <p class="form-control-static">无</p>
+                                    }
+                                    else
+                                    {
+                                        <img src="@leave.ImageUrls" style="width: 100%" />
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert-warning">获取请假信息出错</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h2>审核</h2>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @using (Html.BeginForm("Approve", "Check", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(e => e.CheckId)
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">审核意见</label>
+                            <div class="col-xs-8">
+                                @if (Model.Status == CheckStatus.未查看 || Model.Status == CheckStatus.已查看)
+                                {
+                                    @Html.TextAreaFor(e => e.CheckOpinion, new { @class = "form-control" })
+                                }
+                                else
+                                {
+                                    @Html.TextAreaFor(e => e.CheckOpinion, new { @class = "form-control",@readonly="" })
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">处理选项</label>
+                            <div class="col-xs-8">
+                                @if (Model.Status == CheckStatus.未查看 || Model.Status == CheckStatus.已查看)
+                                {
+                                    <label class="radio-inline">
+                                        @Html.RadioButtonFor(e => e.CheckOpinion, 0, new { @checked = "checked" })同意
+                                    </label>
+                                    <label class="radio-inline">
+                                        @Html.RadioButtonFor(e => e.CheckOpinion, 1)拒绝
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="radio-inline" disabled="disabled">
+                                        @Html.RadioButtonFor(e => e.CheckOpinion, 0, new { @checked = "checked" })同意
+                                    </label>
+                                    <label class="radio-inline" disabled="disabled">
+                                        @Html.RadioButtonFor(e => e.CheckOpinion, 1)拒绝
+                                    </label>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-offset-3">
+                                @if (Model.Status == CheckStatus.未查看 || Model.Status == CheckStatus.已查看)
+                                {
+                                    <button type="submit" id="submitBtn" class="btn btn-primary">提交</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" id="submitBtn" class="btn btn-primary" disabled="">提交</button>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        $('#submitBtn').on("click", function () {
+            if ($('textarea[name=CheckOpinion]').val().length < 10) {
+                alert("请填写足够意见");
+                return false;
+            }
+            return true;
+        });
+
+    </script>
+}

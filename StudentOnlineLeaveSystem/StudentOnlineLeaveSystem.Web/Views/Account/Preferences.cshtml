@@ -1,0 +1,41 @@
+﻿@using StudentOnlineLeaveSystem.Models
+@model StudentOnlineLeaveSystem.Web.Models.PreferencesViewModel
+@{
+    ViewBag.Title = "偏好设置";
+    AppUser user = ViewBag.User;
+}
+@{
+    var leave = @user.Leaves.OrderByDescending(l => l.AddTime).SingleOrDefault();
+    var leavetime = leave == null ? "还没有请过假" : string.Format("{0}  {1}", leave.AddTime.ToString("yyyy-M-d dddd"), leave.Reason);
+}
+
+<div class="row">
+    <div class="col-md-5 hidden-xs hidden-sm">
+        @Html.Partial("_PersonalLeft")
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-default ex-card">
+            <div class="panel-heading ex-card-header">
+                <h2>偏好设置</h2>
+            </div>
+            <div class="panel-body ex-card-body">
+                @using (@Html.BeginForm("Preferences", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

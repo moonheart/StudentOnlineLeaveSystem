@@ -1,0 +1,44 @@
+﻿@using LeaveSystem.Web.Models
+
+@{
+    ViewBag.Title = "StudentLesson";
+    var lessons = ViewBag.Lessons as List<LessonAsign>;
+
+}
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header"></div>
+        <div class="panel-body ex-card-body">
+            <table class="table table-bordered">
+                @for (int y = 0; y < 12; y++)
+                {
+                    <tr>
+                        @for (int x = 0; x < 8; x++)
+                        {
+                            if (@lessons != null)
+                            {
+                                <td>@{
+                                var x1 = x;
+                                var y1 = y;
+                                var list = lessons.Where(e => ((int)e.WeekDay) == y1 && e.ClassSeq == x1).ToList();
+                                var data = "";
+                                if (list.Any())
+                                {
+                                    data = list.Select(e => e.Lesson.LessonName + "<br>" + e.WeekDay + "第" + e.ClassSeq + "节" +
+                                                        "{第" + e.StartWeek + "-" + e.EndWeek + "周}" + "<br>" + e.Teacher.Teacher.Name + "<br>" + e.Classroom)
+                                                        .Aggregate((a, b) => a + "<br><br>" + b);
+                                }
+                                    }@data</td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                        }
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

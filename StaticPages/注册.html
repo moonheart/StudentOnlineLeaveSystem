@@ -1,0 +1,105 @@
+<!doctype html> 
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册 - 在线请假系统</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/myStyle.css">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topFixedNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+        <a class="navbar-brand" href="#">请假系统</a></div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="topFixedNavbar1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">首页<span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="#">请假<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">课程表</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">登录</a></li>
+        <li><a href="#">注册</a></li>
+          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">你好，张三<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">请假记录</a></li>
+              <li><a href="#">个人设置</a></li>
+              <li class="divider"></li>
+              <li><a href="#">请假申请</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  
+<div class="container ex-margin-container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default ex-card">
+                <div class="modal-header panel-heading ex-card-header">
+                    <h2 class="modal-title">用户注册</h2>
+                </div>
+                <div class="modal-body ex-card-box-lg">
+                    <form class="form-signin" role="form" action="/do?c=account&amp;m=register" method="post" onsubmit="$(this).exRequest();">
+    <input type="hidden" name="postSubmit" value="1">
+    <input type="hidden" name="requestHash" value="178197b5nz0wp8">
+    <input type="hidden" name="openId_type" value="">
+    <input type="hidden" name="openId_auth" value="">
+    <input type="hidden" name="forward" value="http://www.coolapk.com/account/login">
+    <div class="alert hide ex-request-alert"></div>
+    <div id="emailFormGroup" class="form-group">
+        <label for="emailInput">Email地址：</label>
+        <input type="text" name="email" class="form-control" id="emailInput" placeholder="请填写正确有效的Email地址">
+    </div>
+    <div id="usernameFormGroup" class="form-group">
+        <label for="usernameInput">用户名：</label>
+        <input type="text" name="username" class="form-control" id="usernameInput" placeholder="由汉字、字母或数字组成，只能以汉字或字母开头">
+    </div>
+    <div id="passwordFormGroup" class="form-group">
+        <label for="passwordInput">密码：</label>
+        <input type="password" name="password" class="form-control" id="passwordInput" placeholder="">
+    </div>
+    <div id="password2FormGroup" class="form-group">
+        <label for="password2Input">确认密码：</label>
+        <input type="password" name="password2" class="form-control" id="password2Input" placeholder="">
+    </div>
+    <div id="readmeFormGroup" class="checkbox">
+        <label>
+            <input type="checkbox" name="readme"> 我同意接受本站的《<a href="#">使用协议</a>》
+        </label>
+    </div>
+    <button type="submit" name="submit" class="btn btn-lg btn-success btn-block" data-loading-text="正在提交注册...">确认注册</button>
+</form>
+                </div>
+            </div>
+            <div class="ex-card">
+                <div class="ex-card-body">
+                    <div class="form-group">
+                        <a href="#" class="btn btn-link btn-block">已经有账号？立即登录 »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><nav class="navbar navbar-default navbar-fixed-bottom">
+  <p class="navbar-text">学生在线请假系统</p>
+    <!-- /.container-fluid -->
+</nav>
+<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+</body>
+</html>

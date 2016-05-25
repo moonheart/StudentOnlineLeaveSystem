@@ -1,0 +1,105 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.OfficeEditViewModel
+@{
+    ViewBag.Title = "编辑部门信息";
+    List<Position> outPositions = ViewBag.OutPositions;
+    List<Position> inPositions = ViewBag.InPositions;
+    SelectList selectList = ViewBag.SelectListDepart;
+}
+@using (Html.BeginForm("Edit", "Office", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container ex-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>编辑基本信息</h3>
+                    </div>
+                    @Html.ValidationSummary()
+                    <div class="panel-body ex-card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.DepartmentId, selectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.HiddenFor(e => e.Id)
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>添加职位</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (outPositions != null && outPositions.Any())
+                            {
+                                foreach (var p in outPositions)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="IdsToAdd" value="@p.Id" />
+                                            <span class="list-group-item-heading">@p.Name</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="list-group-item">暂无数据</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>移除职位</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (inPositions != null && inPositions.Any())
+                            {
+                                foreach (var p in inPositions)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="IdsToRemove" value="@p.Id" />
+                                            <span class="list-group-item-heading">@p.Name</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="list-group-item">暂无数据</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

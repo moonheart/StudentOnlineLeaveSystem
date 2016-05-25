@@ -1,0 +1,18 @@
+﻿@model LeaveSystem.Web.Models.User
+
+@{
+    ViewBag.Title = "确认启用用户";
+}
+
+
+<div class="container ex-container">
+    <h2>确认启用用户？</h2>
+    @using (@Html.BeginForm())
+    {
+        <div class="text-warning">确认启用用户：@Model.UserName</div>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">确认启用</button>
+            @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

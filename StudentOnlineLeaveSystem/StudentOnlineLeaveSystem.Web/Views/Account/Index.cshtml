@@ -1,0 +1,24 @@
+﻿@model StudentOnlineLeaveSystem.Models.AppUser
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.User = Model;
+}
+@{
+    var leave = @Model.Leaves.OrderByDescending(l => l.AddTime).SingleOrDefault();
+    var leavetime = leave == null ? "还没有请过假" : string.Format("{0}  {1}", leave.AddTime.ToString("yyyy-M-d dddd"), leave.Reason);
+}
+
+<div class="row">
+    <div class="col-md-5">
+        @Html.Partial("_PersonalLeft")
+    </div>
+
+    <div class="col-md-7 hidden-xs hidden-sm">
+        <div class="panel panel-default ex-card">
+            <div class="panel-body ex-card-body">
+                    最近一次请假: @leavetime
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.UserCreateViewModel
+
+@{
+    ViewBag.Title = "创建用户";
+    List<Role> roles = ViewBag.Roles;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="ex-page-header ">
+        <div class="container">
+            <div class="ex-page-topbar">
+                <div class="ex-page-titlebar visible-xs">
+                    <h1 class="pull-left">用户创建</h1>
+                    <span class="pull-right">
+                        <button type="submit" class="btn btn-success">确认创建</button>
+                        @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                    </span>
+                </div>
+                <div class="ex-page-titlebar hidden-xs">
+                    <h1 class="pull-left">用户创建</h1>
+                    <span>创建新的用户</span>
+                    <span class="pull-right">
+                        <button type="submit" class="btn btn-success">确认创建</button>
+                        @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container ex-container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>添加基本信息</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(e => e.Number, new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", autocomplete = "off" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(e => e.Name, new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", autocomplete = "off" })
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            @Html.PasswordFor(x => x.Password, new { @class = "form-control", autocomplete = "off" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>同时添加角色</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (roles != null && roles.Any())
+                            {
+                                foreach (var role in roles)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" value="@role.Name" name="RolesToAdd" />
+                                            <span class="list-group-item-heading">@role.Name</span>
+                                            <span class="list-group-item-text">@role.Description</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="list-group-item">暂无数据
+                                </a>                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

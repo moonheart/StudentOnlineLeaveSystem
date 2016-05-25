@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StudentOnlineLeaveSystem.Models.UserRoleRelation" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserRoleRelation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.Models.Leave" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAgIAAAAABKAAAAAAAAgBAAAAAAAgAAAgEAACAA=</HashCode>
+      <FileName>Leave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.Models.Role" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAgAAAAAAAAAAQBAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.Models.User" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAEACAAAAgAAAAAABgBAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.Models.UserConfig" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAABAAAABAAAAAAAAAgAAEgAAAAAA=</HashCode>
+      <FileName>UserConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.Models.Check">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Check.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

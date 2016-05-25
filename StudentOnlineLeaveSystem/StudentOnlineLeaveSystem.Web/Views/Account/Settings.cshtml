@@ -1,0 +1,36 @@
+﻿@model StudentOnlineLeaveSystem.Models.AppUser
+@{
+    ViewBag.Title = "个人设置";
+    ViewBag.User = Model;
+}
+
+<div class="row">
+    <div class="col-md-5 hidden-xs hidden-sm">
+        @Html.Partial("_PersonalLeft")
+    </div>
+
+    <div class="col-md-7">
+        <div class="panel panel-default ex-card">
+            <div class="panel-heading ex-card-header">
+                <h2>个人设置</h2>
+            </div>
+            <div class="panel-body ex-card-body">
+                @using (@Html.BeginForm("Preferences", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                    <div class="form-group">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

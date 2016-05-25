@@ -1,0 +1,88 @@
+﻿@model LeaveSystem.Web.ViewModels.PositionEditViewModel
+@{
+    ViewBag.Title = "编辑专业";
+    SelectList selectListTeacher = ViewBag.selectListTeacher;
+    SelectList selectListOffice = ViewBag.selectListOffice;
+    SelectList selectListDepart = ViewBag.selectListDepart;
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>编辑专业</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @Html.ValidationSummary()
+                    @using (Html.BeginForm("Edit", "Position", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(e => e.DepartmentId, selectListDepart, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.OfficeId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(e => e.OfficeId, selectListOffice, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(e => e.UserId, selectListTeacher, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.HiddenFor(m=>m.Id)
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#DepartmentId").change(function () {
+
+            $.ajax({
+                url: '/Position/GetOfficesOfDepartment?departId=' + $("#DepartmentId").val(),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                error: function (parameters) {
+                    alert(parameters.responseText);
+                },
+                success: function (parameters) {
+                    if (parameters.error == 1) {
+                        alert(parameters.message);
+                    } else {
+                        var s = $("#OfficeId");
+                        s.empty();
+                        $(parameters.data).each(function () {
+                            s.append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

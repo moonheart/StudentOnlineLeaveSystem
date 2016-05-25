@@ -1,0 +1,122 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.ClassEditViewModel
+
+@{
+    ViewBag.Title = "编辑班级";
+    SelectList departmentsList = ViewBag.departSelectList;
+    SelectList majorsList = ViewBag.majorSelectList;
+    SelectList gradesList = ViewBag.gradeSelectList;
+    SelectList teacherSelectList = ViewBag.teacherSelectList;
+    List<Class> classes = ViewBag.Classes;
+}
+@using (Html.BeginForm("Edit", "Class", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container ex-container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>编辑基本信息</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(c => c.DepartmentId, departmentsList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MajorId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(c => c.MajorId, majorsList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GradeId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(c => c.GradeId, gradesList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ClassTeacherId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.ClassTeacherId, teacherSelectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Defination, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Defination, new { @class = "form-control", type = "number" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>移除现有的学生</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (Model.Students != null && Model.Students.Any())
+                            {
+                                foreach (var student in Model.Students)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="IdsToRemove" value="@student.Id" />
+                                            <span class="list-group-item-heading">@student.UserName</span>
+                                            <span class="list-group-item-text text-muted">@student.Id</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a class="list-group-item">暂无数据</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="panel-footer ex-card-footer"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+@section Scripts{
+    <script>
+        $("#DepartmentId").change(function () {
+
+            $.ajax({
+                url: '/Class/GetMajorOfDepartment?departId=' + $("#DepartmentId").val(),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                error: function (parameters) {
+                    alert(parameters.responseText);
+                },
+                success: function (parameters) {
+                    if (parameters.error == 1) {
+                        alert(parameters.message);
+                    } else {
+                        var s = $("#MajorId");
+                        s.empty();
+                        $(parameters.data).each(function () {
+                            s.append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

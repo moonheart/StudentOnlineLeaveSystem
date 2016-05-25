@@ -1,0 +1,106 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.OfficeCreateViewModel
+@{
+    ViewBag.Title = "添加部门";
+    List<Position> positions = ViewBag.Positions;
+    List<Office> offices = ViewBag.Offices;
+    SelectList selectlist = ViewBag.SelectListDepart;
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>添加部门</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @Html.ValidationSummary()
+                    @using (Html.BeginForm("Create", "Office", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.DepartmentId, selectlist, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>现有的未分配职位</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    <div class="list-group">
+                        @if (positions != null && positions.Any())
+                        {
+                            foreach (var p in positions)
+                            {
+                                <a class="list-group-item list-group-item-heading">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="IdsToAdd" value="@p.Id" />
+                                        <span class="list-group-item-heading">@p.Name</span>
+                                        <span class="list-group-item-text text-muted">@p.Id</span>
+                                    </label>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="list-group-item">暂无数据</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>现有的部门</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    <div class="list-group">
+                        @if (offices != null && offices.Any())
+                        {
+                            foreach (var p in offices)
+                            {
+                                <a class="list-group-item list-group-item-heading">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="IdsToAdd" value="@p.Id" />
+                                        <span class="list-group-item-heading">@p.Name</span>
+                                        <span class="list-group-item-text text-muted">@p.Id</span>
+                                    </label>
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <a class="list-group-item">暂无数据</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

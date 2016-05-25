@@ -1,0 +1,65 @@
+﻿@model LeaveSystem.Web.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "注册";
+}
+<div class="container ex-margin-container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default ex-card">
+                <div class="modal-header panel-heading ex-card-header">
+                    <h2 class="modal-title">用户注册</h2>
+                </div>
+                <div class="modal-body ex-card-box-lg">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "6位或12位" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "填写姓名" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "密码" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "确认密码" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.VerificationCode, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.VerificationCode, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "验证码", autocomplete = "off" } })
+                            <img id="verificationcode" src="@Url.Action("VerificationCode")" style="cursor:pointer" />
+                            @Html.ValidationMessageFor(model => model.VerificationCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div id="readmeFormGroup" class="checkbox">
+                            <label>
+                                <input type="checkbox" name="readme"> 我同意接受本站的《<a href="#">使用协议</a>》
+                            </label>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-lg btn-success btn-block" data-loading-text="正在提交注册...">确认注册</button>
+                    }
+                </div>
+            </div>
+            <div class="ex-card">
+                <div class="ex-card-body">
+                    <div class="form-group">
+                        <a href="@Url.Action("Login")" class="btn btn-link btn-block">已经有账号？立即登录 »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

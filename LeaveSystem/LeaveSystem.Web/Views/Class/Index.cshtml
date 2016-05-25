@@ -1,0 +1,125 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<LeaveSystem.Web.Models.Class>
+
+@{
+    ViewBag.Title = "所有班级";
+    Dictionary<int, int> group = ViewBag.Group;
+}
+@Html.Partial("_PageHeader", new ViewDataDictionary { { "head", "所有班级" }, { "name", "创建班级" }, { "des", "查看所有班级的列表，进行管理" }, { "act", "Create" } })
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            @using (Html.BeginForm("Index", "Class", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="搜索" />
+            }
+        </div>
+
+        <div class="panel-body ex-card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>学院</th>
+                        <th>专业</th>
+                        <th>年级</th>
+                        <th>班别</th>
+                        <th>班主任</th>
+                        <th>班级人数</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var oneClass in Model)
+                        {
+                            <tr>
+                                <td>@oneClass.Major.Department.Name</td>
+                                <td>@oneClass.Major.Name</td>
+                                <td>@oneClass.Grade.GradeNum</td>
+                                <td>@oneClass.ClassDefination</td>
+                                @if (oneClass.ClassTeacher == null)
+                                {
+                                    <td>暂无</td>
+                                }
+                                else
+                                {
+                                    <td>@oneClass.ClassTeacher.Teacher.Name</td>
+                                }
+                                @if (group.ContainsKey(oneClass.Id))
+                                {
+                                    <td>@group[oneClass.Id]</td>
+                                }
+                                else
+                                {
+                                    <td>0</td>
+                                }
+                                <td>
+                                    @Html.ActionLink("编辑", "Edit", new { id = oneClass.Id }, new { @class = "btn btn-primary btn-xs" })
+                                    <a class="btn btn-danger btn-xs delete" data-id="@oneClass.Id" data-name="@oneClass.ClassDefination" data-toggle="modal" data-target="#deleteModal">删除</a>
+                                    @Html.ActionLink("添加学生", "AddStudent", new { id = oneClass.Id }, new { @class = "btn btn-primary btn-xs" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center">暂无内容</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer ex-card-footer text-center">
+            @Html.PagedListPager(Model, p => Url.Action("Index", new { p, currentFilter = ViewBag.CurrentFilter, selectedRole = ViewBag.SelectedRoleId }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (Html.BeginForm("Delete", "Class", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">注意！</h4>
+                </div>
+                <div class="modal-body">
+                    <h1></h1>
+                    <input type="hidden" name="id" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">确认</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var name = button.data('name'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('.modal-body input').val(id);
+            modal.find('.modal-body h1').text('确认删除班级 ' + name + '?');
+        });
+
+
+        $(".pull-right a").each(function (i, item) {
+            if (item.innerText === "@ViewBag.Title") {
+                $(this).addClass("active");
+            }
+        })
+    </script>
+}

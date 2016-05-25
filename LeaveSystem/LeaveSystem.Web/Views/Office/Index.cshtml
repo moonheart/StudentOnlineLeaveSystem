@@ -1,0 +1,110 @@
+﻿@using LeaveSystem.Web.Models
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<LeaveSystem.Web.Models.Office>
+
+@{
+    ViewBag.Title = "所有部门";
+}
+
+@Html.Partial("_PageHeader", new ViewDataDictionary { { "head", "所有部门" }, { "name", "创建部门" }, { "des", "查看所有部门的列表，进行管理" }, { "act", "Create" } })
+
+<div class="container ex-container">
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            @using (Html.BeginForm("Index", "Office", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                <input type="submit" class="btn btn-default" value="搜索" />
+            }
+        </div>
+        <div class="panel-body ex-card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                        <th>职位</th>
+                        <th>所属学院</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr><td colspan="5" class="text-center">暂无部门</td></tr>
+                    }
+                    else
+                    {
+                        foreach (var office in Model)
+                        {
+                            var id = office.Id;
+                            var positions = office.Positions;
+                            <tr>
+                                <td>@office.Id</td>
+                                <td>@office.Name</td>
+                                <td>@office.Description</td>
+                                @if (positions.Any())
+                                {
+                                    <td>@positions.Select(r => r.Name).Aggregate((a, b) => a + "," + b) </td>
+                                }
+                                else
+                                {
+                                    <td>暂无</td>
+                                }
+                                <td>@office.Department.Name</td>
+                                <td>
+                                    @Html.ActionLink("编辑", "Edit", new { id = office.Id }, new { @class = "btn btn-primary btn-xs" })
+                                    <a class="btn btn-danger btn-xs delete" data-id="@office.Id" data-name="@office.Name" data-toggle="modal" data-target="#deleteModal">删除</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer ex-card-footer text-center">
+            @Html.PagedListPager(Model, p => Url.Action("Index", new { p, currentFilter = ViewBag.CurrentFilter, selectedRole = ViewBag.SelectedRoleId }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @using (Html.BeginForm("Delete", "Office", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">注意！</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1></h1>
+                        <input type="hidden" name="id" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id');
+            var name = button.data('name'); // Extract info from data-* attributes
+            var modal = $(this);
+            modal.find('.modal-body input').val(id);
+            modal.find('.modal-body h1').text('确认删除 ' + name + '?');
+        });
+
+    </script>
+}

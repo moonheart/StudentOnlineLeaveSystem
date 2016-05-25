@@ -1,0 +1,27 @@
+﻿@{
+    StudentOnlineLeaveSystem.Models.AppUser user = ViewBag.User;
+}
+<div class="panel panel-default ex-card ex-card-dashboard" style="background-image: url('@Url.Content("~/Images/cover_6_big.jpg")');">
+    <div class="panel-heading media ex-card-header">
+        <a class="pull-left" href="#">
+            <img class="media-object img-circle" src="@Url.Content("~/Images/head.jpg")" alt="月心月士">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="#" class="username">@user.DisplayName</a></h4>
+        </div>
+    </div>
+    <div class="ex-card-backdrop"></div>
+    <div class="ex-card-body ex-page-infobar">
+        <div class="row">
+            <a href="@Url.Action("Index","Leave")" class="col-xs-3 first-child"><span><strong>@user.Leaves.Count()</strong>请假次数</span></a>
+            <a href="#" class="col-xs-9"><span><strong>2</strong>这里提供信息统计概览</span></a>
+        </div>
+    </div>
+    <div class="ex-card-body list-group ex-flat-list">
+        <a href="@Url.Action("Statistics")" class="list-group-item">我的信息统计</a>
+        <a href="@Url.Action("Preferences")" class="list-group-item">请假偏好设置</a>
+        <a href="@Url.Action("Settings")" class="list-group-item">个人设置</a>
+        <a href="/home/album" class="list-group-item">我的假条模版</a>
+    </div>
+</div>
+

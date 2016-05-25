@@ -1,0 +1,77 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.Models.LeaveConfig
+@{
+    ViewBag.Title = "请假配置";
+    var teachers = ViewBag.Teachers as SelectList;
+}
+
+<div class="container ex-container">
+    @using (Html.BeginForm("Edit", "LeaveConfig", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.HiddenFor(e => e.Id)
+        @Html.AntiForgeryToken()
+        <div class="panel panel-default ex-card">
+            <div class="panel-heading ex-card-header">
+                <h3>
+                    请假配置<button type="submit" class="btn btn-primary pull-right">保存</button>
+                </h3>
+            </div>
+            <div class="panel-body ex-card-body">
+                <div class="form-group">
+                    @Html.LabelFor(e => e.LeastDayToSign, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.LeastDayToSign, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.LeastResumeDay, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.LeastResumeDay, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.LeastSickLeaveDay, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.LeastSickLeaveDay, new { @class = "form-control " })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.MaxLeaveClassInOneMonth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.MaxLeaveClassInOneMonth, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.MaxLeaveDayInOneMonth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.MaxLeaveDayInOneMonth, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.MaxLeaveTimeInOneMonth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.MaxLeaveTimeInOneMonth, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.ResumeClassroom, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(e => e.ResumeClassroom, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.ResumeTeacherId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(e => e.ResumeTeacherId, teachers, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(e => e.ClerkTeacherId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(e => e.ClerkTeacherId, teachers, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            @Html.ValidationSummary()
+        </div>}
+</div>

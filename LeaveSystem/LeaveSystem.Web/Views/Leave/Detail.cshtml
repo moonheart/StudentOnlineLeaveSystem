@@ -1,0 +1,98 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.LeaveDetailViewModel
+
+@{
+    ViewBag.Title = "请假详细";
+}
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h2>请假详情</h2>
+                </div>
+                <div class="panel-body ex-card-body">
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.Reason)</label>
+                            <div class="col-xs-8">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.Reason)</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.Category)</label>
+                            <div class="col-xs-8">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.Category)</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.LeaveTime)</label>
+                            <div class="col-xs-8">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.LeaveTime)</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.ApplyTime)</label>
+                            <div class="col-xs-8">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.ApplyTime)</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.IsResume)</label>
+                            <div class="col-xs-8">
+                                <p class="form-control-static">@Html.DisplayFor(model => model.IsResume)</p>
+                            </div>
+                        </div>
+                        @if (Model.IsResume == ResumeStatus.已销假)
+                        {
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label">@Html.DisplayNameFor(model => model.ResumeTime)</label>
+                                <div class="col-xs-8">
+                                    <p class="form-control-static">@Html.DisplayFor(model => model.ResumeTime)</p>
+                                </div>
+                            </div>
+                        }
+                    </form>
+                    <div class="col-md-5 col-md-offset-5">
+                        <a class="btn btn-success" href="@Url.Action("Index")">返回列表</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.Checks.Any())
+        {
+            <div class="col-md-4">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header ex-no-border">
+                        <h2>审核信息</h2>
+                    </div>
+                    <div class="panel-body ex-card-body media-list ex-card-album-list">
+                        @foreach (var check in Model.Checks)
+                        {
+                            <div class="media">
+                                <a class="pull-left">
+                                    <img class="media-object img-rounded" title="@check.CheckTeacher.Teacher.Name" alt="@check.CheckTeacher.Teacher.Name" src="@check.CheckTeacher.Teacher.HeadImage">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@check.CheckStatus</h4>
+                                    <div class="media-info">
+                                        @if (string.IsNullOrEmpty(@check.CheckOpinion))
+                                        {
+                                            @:暂无审核意见
+                                    }
+                                        else
+                                        {
+                                            @check.CheckOpinion
+                                        }
+                                    </div>
+                                    @check.CheckTeacher.Teacher.Name
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

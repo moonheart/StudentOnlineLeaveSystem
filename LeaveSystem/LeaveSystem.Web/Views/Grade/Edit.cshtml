@@ -1,0 +1,34 @@
+﻿@model LeaveSystem.Web.ViewModels.GradeEditViewModel
+@{
+    ViewBag.Title = "编辑年级";
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="panel panel-default ex-card">
+                <div class="panel-heading ex-card-header">
+                    <h3>编辑年级</h3>
+                </div>
+                <div class="panel-body ex-card-body">
+                    @Html.ValidationSummary()
+                    @using (Html.BeginForm("Edit", "Grade", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GradeNumber, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.GradeNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

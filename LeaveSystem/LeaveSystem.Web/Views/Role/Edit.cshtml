@@ -1,0 +1,103 @@
+﻿@using LeaveSystem.Web.ViewModels
+@model RoleEditViewModel
+@{
+    ViewBag.Title = "编辑角色";
+}
+@using (Html.BeginForm())
+{
+<div class="ex-page-header ">
+    <div class="container">
+        <div class="ex-page-topbar">
+            <div class="ex-page-titlebar hidden-xs">
+                <h1 class="pull-left">编辑角色</h1>
+                <span class="">编辑角色【@Model.Role.Name】,添加或者移除角色下的用户</span>
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                    @Html.ActionLink("取消", "Index", null, new {@class = "btn btn-default"})
+                </span>
+            </div>
+            <div class="ex-page-titlebar visible-xs">
+                <h1 class="pull-left">编辑角色</h1>
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                    @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                </span>
+            </div>
+       </div>
+    </div>
+</div>
+    <div class="container ex-container">
+        @Html.ValidationSummary()
+        <input type="hidden" name="roleName" value="@Model.Role.Name" />
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h2>向角色【 @Model.Role.Name】添加用户</h2>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (!Model.NonMembers.Any())
+                            {
+                                <a>
+                                    <label>
+                                        暂时没有可以添加的用户
+                                    </label>
+                                </a>
+                            }
+                            else
+                            {
+                                foreach (var user in Model.NonMembers)
+                                {
+                                    <a class="list-group-item">
+
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="IdsToAdd" value="@user.Id">
+                                            <span class="list-group-item-heading">@user.UserName</span>&nbsp;
+                                            <span class="list-group-item-text">Id:@user.Id</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default ex-card ">
+                    <div class="panel-heading ex-card-header">
+                        <h2> 从角色【 @Model.Role.Name】移除用户</h2>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (!Model.Members.Any())
+                            {
+                                <a class="list-group-item">
+                                    <label>
+                                        暂时没有可以添加的用户
+                                    </label>
+                                </a>
+                            }
+                            else
+                            {
+                                foreach (var user in Model.Members)
+                                {
+                                    <a class="list-group-item">
+
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                                            <span class="list-group-item-heading">@user.UserName</span>&nbsp;
+                                            <span class="list-group-item-text">Id:@user.Id</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,33 @@
+﻿@using LeaveSystem.Web.Infrastructure
+@using LeaveSystem.Web.Models
+@{
+    var user = ViewBag.CurrentUser as User;
+    var username = user == null ? "" : user.Name;
+    var userhead = user == null ? "/Images/head-unlogged.png" : user.HeadImage;
+}
+<div class="panel panel-default ex-card ex-card-dashboard" style="background-image:url('/images/cover_6_big.jpg')">
+    <div class="panel-heading media ex-card-header">
+        <a class="pull-left" >
+            <img class="media-object img-circle" src="@userhead" alt="@username">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a class="username">@username</a></h4>
+        </div>
+    </div>
+    <div class="ex-card-backdrop"></div>
+    <div class="ex-card-body ex-page-infobar">
+        <div class="row">
+        </div>
+    </div>
+    <div class="ex-card-body list-group ex-flat-list">
+        <a href="@Url.Action("Profiles","Manage")" class="list-group-item">资料设置</a>
+        <a href="@Url.Action("HeadSet","Manage")" class="list-group-item">头像设置</a>
+    </div>
+</div>
+
+
+<div class="panel panel-default ex-card">
+    <div class="ex-card-body list-group ex-flat-list">
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="list-group-item bg-danger">退出登录</a>
+    </div>
+</div>

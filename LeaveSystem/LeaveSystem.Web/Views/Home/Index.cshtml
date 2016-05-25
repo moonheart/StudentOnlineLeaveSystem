@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container ex-container">
+    <div class="jumbotron" style="background-color: #fafafa;">
+        <h1>在线请假系统</h1>
+        <p class="lead">本系统采用B/S架构作为系统的总体结构，以Web数据库技术为依托，利用微软的ASP.NET技术，结合ADO，实现了对Web数据库的访问和查询。该设计实现了请假条提交、审阅、查看等功能，提高了学生办理请假的效率，方便任课教师和学工办教师对学生出勤情况管理。学生用学号登录成功后，需阅读请假须知，之后选择请假项目进入请假页面，写清事由和请假时间，上传相关请假依据，完成相应请假。根据请假时间长短，由班主任或学工办主任或学院书记进行请假审批。任课老师可以查阅假条审批结果，标记学生到课情况。</p>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p>
+                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">立即注册</a>
+                <a class="btn btn-success" href="@Url.Action("Login", "Account")">登录</a>
+            </p>
+        }
+    </div>
+</div>
+

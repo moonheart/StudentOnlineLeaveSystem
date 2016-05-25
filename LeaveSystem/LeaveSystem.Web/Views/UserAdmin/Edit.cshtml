@@ -1,0 +1,117 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.UserEditViewModel
+
+@{
+    ViewBag.Title = "编辑用户";
+    List<Role> inRoles = ViewBag.InRoles;
+    List<Role> outRoles = ViewBag.OutRoles;
+}
+@using (Html.BeginForm("Edit", "UserAdmin", FormMethod.Post, new { @class = "" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="ex-page-header ">
+        <div class="container">
+            <div class="ex-page-topbar">
+                <div class="ex-page-titlebar visible-xs">
+                    <h1 class="pull-left">用户编辑</h1>
+                    <span class="pull-right form-group">
+                        <button type="submit" class="btn btn-success">保存</button>
+                        @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                    </span>
+                </div>
+                <div class="ex-page-titlebar hidden-xs">
+                    <h1 class="pull-left">用户编辑</h1>
+                    <span class="">编辑用户信息，添加或者移除角色</span>
+                    <span class="pull-right form-group">
+                        <button type="submit" class="btn btn-success">保存</button>
+                        @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container ex-container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default ex-card ">
+                    <div class="panel-heading ex-card-header">
+                        <h2>编辑基本信息</h2>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Number)
+                            @Html.TextBoxFor(x => x.Number, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Name)
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input name="password" type="password" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="panel panel-default ex-card ">
+                    <div class="panel-heading ex-card-header">
+                        <h2>移除角色</h2>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group">
+                            @if (inRoles != null && inRoles.Any())
+                            {
+                                foreach (Role role in inRoles)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="NamesToRemove" value="@role.Name" />
+                                            <span class="list-group-item-heading">@role.Name</span>&nbsp;
+                                            <span class="list-group-item-text text-muted">@role.Description</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a>暂无</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h2>添加角色</h2>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <div class="list-group ">
+                            @if (outRoles != null && outRoles.Any())
+                            {
+                                foreach (Role role in outRoles)
+                                {
+                                    <a class="list-group-item">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="NamesToAdd" value="@role.Name" />
+                                            <span class="list-group-item-heading">@role.Name</span>&nbsp;
+                                            <span class="list-group-item-text text-muted">@role.Description</span>
+                                        </label>
+                                    </a>
+                                }
+                            }
+                            else
+                            {
+                                <a>暂无</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

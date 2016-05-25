@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="StudentOnlineLeaveSystem.DAL.BaseRepository&lt;T&gt;" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIYAAAQAAAAAAAAAAAAAAAQAAAEIAAAAAAEACAEAAAA=</HashCode>
+      <FileName>BaseRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.DAL.ContextFactory" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>ContextFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.DAL.LeaveRepository" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LeaveRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.DAL.RepositoryFactory" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>RepositoryFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.DAL.StudentOnlineLeaveSystemDbContext" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAgEAAAAAAAQAABAAAAA=</HashCode>
+      <FileName>StudentOnlineLeaveSystemDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudentOnlineLeaveSystem.DAL.UserRepository" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

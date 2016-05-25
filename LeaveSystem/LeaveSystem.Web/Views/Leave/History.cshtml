@@ -1,0 +1,76 @@
+﻿@using LeaveSystem.Web.Models
+@model IEnumerable<LeaveSystem.Web.ViewModels.LeaveListViewModel>
+
+@{
+    ViewBag.Title = "历史请假";
+}
+
+<div class="container ex-container">
+
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h2>历史请假</h2>
+        </div>
+        <div class="panel-body ex-card-body">
+            @if (!Model.Any())
+            {
+                <span class="text-success">暂无</span>
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveReason)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ToWhere)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeaveTime)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+                            <th>是否销假</th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveReason)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ToWhere)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeaveTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Leave.LeaveStatus)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.Leave.IsResume)</td>
+                                <td>
+                                    @Html.ActionLink("详细", "Detail", new { id = item.LeaveId })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a href="#">导出</a>
+            }
+        </div>
+    </div>
+</div>

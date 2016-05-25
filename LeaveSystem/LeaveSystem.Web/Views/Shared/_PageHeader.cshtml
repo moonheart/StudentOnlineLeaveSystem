@@ -1,0 +1,19 @@
+﻿<div class="ex-page-header ">
+    <div class="container">
+        <div class="ex-page-topbar">
+            <div class="ex-page-titlebar visible-xs">
+                <h1 class="pull-left">@ViewData["head"]</h1>
+                <span class="pull-right">
+                    @Html.ActionLink(ViewData["name"].ToString(), ViewData["act"].ToString(), null, new { @class = "btn btn-default" })
+                </span>
+            </div>
+            <div class="ex-page-titlebar hidden-xs">
+                <h1 class="pull-left">@ViewData["head"]</h1>
+                <span>@ViewData["des"]</span>
+                <span class="pull-right">
+                    @Html.ActionLink(ViewData["name"].ToString(), ViewData["act"].ToString(), null, new { @class = "btn btn-default" })
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

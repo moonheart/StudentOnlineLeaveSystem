@@ -1,0 +1,38 @@
+﻿@model IQueryable<StudentOnlineLeaveSystem.Models.Leave>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Any())
+{
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h1>当前正在进行的请假:</h1>
+        </div>
+        <div class="panel-body ex-card-body">
+            <h3 class="text-info">@Model.FirstOrDefault().Reason</h3>
+        </div>
+        <div class="panel-footer ex-card-footer">
+            <button class="btn btn-primary">详细</button>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="panel panel-default ex-card">
+        <div class="panel-heading ex-card-header">
+            <h1>当前没有正在进行的请假。</h1>
+        </div>
+        <div class="panel-body ex-card-body">
+            <h3><a href="#">查看请假须知</a></h3>
+        </div>
+        <div class="panel-footer ex-card-footer">
+            @Html.ActionLink("我要请假", "Notice", "Leave", "", htmlAttributes: new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+}
+
+

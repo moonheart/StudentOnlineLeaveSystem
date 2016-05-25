@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 在线请假系统</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top ex-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @{
+
+                        if (User.IsInRole("Administrator"))
+                        {
+                            <li>@Html.ActionLink("角色管理", "Index", "Role")</li>
+                            <li>@Html.ActionLink("用户管理", "Index", "UserAdmin")</li>
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">
+                                    机构管理 <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("学院管理", "Index", "Department")</li>
+                                    <li>@Html.ActionLink("部门管理", "Index", "Office")</li>
+                                    <li>@Html.ActionLink("职位管理", "Index", "Position")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("专业管理", "Index", "Major")</li>
+                                    <li>@Html.ActionLink("年级管理", "Index", "Grade")</li>
+                                    <li>@Html.ActionLink("班级管理", "Index", "Class")</li>
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("请假配置", "Index", "LeaveConfig")</li>
+                        }
+                        if (User.IsInRole("Student"))
+                        {
+                            <li>@Html.ActionLink("请假管理", "Index", "Leave")</li>
+                            <li>@Html.ActionLink("历史请假", "History", "Leave")</li>
+                        }
+                        if (User.IsInRole("Teacher"))
+                        {
+                            <li>@Html.ActionLink("待审请假", "Index", "Check")</li>
+                            <li>@Html.ActionLink("请假历史", "History", "Check")</li>
+                            <li>@Html.ActionLink("待审销假", "Index", "Resume")</li>
+                            <li>@Html.ActionLink("销假历史", "History", "Resume")</li>
+                        }
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="container hidden-xs">
+        <div class="ex-footer">
+            <div class="footer-copyright"> <span><a href="#">关于我们</a> · <a href="#">联系我们</a> · <a href="#">版权声明</a></span> <span class="pull-right">Copyright © 2015-@DateTime.Now.Year 在线请假系统, All Rights Reserved.</span> </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        //$('.dropdown-toggle').mouseover(function () {
+        //    $(this).dropdown("toggle");
+        //}).mouseout(function() {
+
+        //});
+    </script>
+</body>
+</html>

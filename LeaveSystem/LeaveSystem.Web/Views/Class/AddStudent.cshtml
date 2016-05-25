@@ -1,0 +1,102 @@
+﻿@using LeaveSystem.Web.Models
+@using PagedList
+@using PagedList.Mvc
+@model LeaveSystem.Web.ViewModels.AddStudentsViewModel
+@{
+    ViewBag.Title = "添加班级学生";
+    IPagedList<User> list = ViewBag.OutStudents;
+    Class class1 = ViewBag.Class;
+}
+@using (Html.BeginForm("AddStudent", "Class", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="ClassId" value="@class1.Id" />
+    <div class="container ex-container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ValidationSummary()
+                <div class="panel panel-default ex-card">
+                    <div class="panel-body ex-card-body">
+                        @if (Model.StudentsName != null && Model.StudentsName.Length > 0)
+                        {
+                            <p>
+                                当前班级人数：@Model.StudentsName.Length
+                            </p>
+
+                            <p>
+                               当前班级成员： @Model.StudentsName.Aggregate((a, b) => a + "," + b)
+                            </p>
+                        }
+                        else
+                        {
+                            <div>
+                                <p>当前班级人数：0</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="panel panel-default ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>选择要添加到班级的学生</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        <table class="table table-hover studentList">
+                            <thead>
+                                <tr>
+                                    <th><input id="selectall" type="checkbox" /></th>
+                                    <th>ID</th>
+                                    <th>学号</th>
+                                    <th>用户名</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (list != null && list.Any())
+                                {
+                                    foreach (var student in list)
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox" name="IdsToAdd" value="@student.Id" /></td>
+                                            <td>@student.Id</td>
+                                            <td>@student.UserName</td>
+                                            <td>@student.Name</td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>暂无数据</tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer ex-card-footer text-center">
+                        @Html.PagedListPager(list, l => Url.Action("AddStudent", new { id = class1.Id, p = l }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+                    </div>
+                </div>
+                <div class="panel panel-default ex-card">
+                    <div class="panel-body ex-card-body text-center">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+@section Scripts{
+    <script>
+        $("#selectall").change(function (e) {
+            $("input[name=IdsToAdd]").each(function () {
+                this.checked = e.target.checked;
+            });
+        });
+        $("input[name=IdsToAdd]").change(function (e) {
+            if (!e.target.checked) {
+                document.getElementById("selectall").checked = false;
+            }
+        });
+    </script>
+}

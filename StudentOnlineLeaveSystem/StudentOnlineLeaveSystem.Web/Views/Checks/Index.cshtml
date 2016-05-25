@@ -1,0 +1,59 @@
+﻿@model IEnumerable<StudentOnlineLeaveSystem.Models.Check>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOpinon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOpinon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.CheckId}) |
+                    @Html.ActionLink("Details", "Details", new {id = item.CheckId}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.CheckId})
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <p>暂时没有需要审批的请假申请</p>
+}

@@ -1,0 +1,93 @@
+﻿@using LeaveSystem.Web.Models
+@model LeaveSystem.Web.ViewModels.ClassCreateViewModel
+
+@{
+    ViewBag.Title = "创建班级";
+    SelectList departmentsList = ViewBag.departSelectList;
+    SelectList majorsList = ViewBag.majorSelectList;
+    SelectList gradesList = ViewBag.gradeSelectList;
+    SelectList teacherSelectList = ViewBag.teacherSelectList;
+    List<Class> classes = ViewBag.Classes;
+}
+@using (Html.BeginForm("Create", "Class", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container ex-container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="panel ex-card">
+                    <div class="panel-heading ex-card-header">
+                        <h3>编辑基本信息</h3>
+                    </div>
+                    <div class="panel-body ex-card-body">
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DepartmentId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.DepartmentId, departmentsList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.MajorId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.MajorId, majorsList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.GradeId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.GradeId, gradesList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ClassTeacherId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(m => m.ClassTeacherId, teacherSelectList, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Defination, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Defination, new { @class = "form-control", type = "number" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="submit" class="btn btn-success">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+@section Scripts{
+    <script>
+        $("#DepartmentId").change(function () {
+
+            $.ajax({
+                url: '/Class/GetMajorOfDepartment?departId=' + $("#DepartmentId").val(),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                error: function (parameters) {
+                    alert(parameters.responseText);
+                },
+                success: function (parameters) {
+                    if (parameters.error == 1) {
+                        alert(parameters.message);
+                    } else {
+                        var s = $("#MajorId");
+                        s.empty();
+                        $(parameters.data).each(function () {
+                            s.append("<option value='" + this.Id + "'>" + this.Name + "</option>");
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+}

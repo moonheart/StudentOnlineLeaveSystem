@@ -1,0 +1,85 @@
+﻿@model StudentOnlineLeaveSystem.Web.Areas.Member.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>用户注册</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayName)
+                @Html.ValidationMessageFor(model => model.DisplayName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ConfirmPassword)
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VerificationCode, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VerificationCode)
+                <img id="verificationcode" title="点击刷新" src="@Url.Action("VerificationCode")" style="cursor:pointer" />
+                @Html.ValidationMessageFor(model => model.VerificationCode)
+            </div>
+        </div>
+        <div class="checkbox">
+            <input type="checkbox" checked="checked" required />我同意 <a href="#">《用户注册协议》</a>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="注册" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $("#verificationcode").click(function () {
+        $("#verificationcode").attr("src", "@Url.Action("VerificationCode")?" + new Date());
+    })
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

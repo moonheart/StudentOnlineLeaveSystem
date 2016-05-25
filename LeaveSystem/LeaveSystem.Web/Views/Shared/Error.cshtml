@@ -1,0 +1,43 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "错误";
+}
+
+<div class="container ex-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <h1>
+                    @if (Model == null)
+                    {
+                        @: 发生意外错误，请重试！
+                    }
+                    else
+                    {
+                        switch (Model.Count())
+                        {
+                            case 0:
+                                @: 发生意外错误，请重试！
+                            break;
+                            case 1:
+                            @Model.First()
+                            ;
+                            break;
+                            default:
+                            @: 出现了如下错误：
+                            <ul>
+                                @foreach (string error in Model)
+                                {
+                                    <li>@error</li>
+                                }
+                            </ul>
+                                break;
+                        }
+                    }
+                </h1>
+            </div>
+
+        </div>
+    </div>
+</div>
